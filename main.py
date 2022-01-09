@@ -331,3 +331,71 @@ def Menu():
             print("This feature is currently not available")
 
 Menu()
+
+
+
+#find by name
+def checkItem():
+    item = input("Please enter the name of the item you want to find: \n")
+    temp_list = []
+    for item in master_dictionary.keys():
+        temp_list.append(item)
+    if item in temp_list:
+        print("The item you are looking for" + item + " is in the shop")
+        answer = input("Do you want to add " + item + " to your cart?: ")
+        if answer == "Yes":
+            print(item + " has successfully added to the cart!")
+            shopping_cart.append(item)
+            choice = input("Do you want to keep searching?:")
+            while choice == "Yes":
+                item = input("What item are you looking for?:")
+                if item in temp_list:
+                    print("The item you are looking for " + item + " is in the shop ")
+                    answer = input("Do you want to add " + item + " to your cart?: ")
+                    if answer == "Yes":
+                        print(item + " has successfully added to the cart!")
+                        shopping_cart.append(item)
+                        choice = input("Do you want to keep searching?: ")
+                    else:
+                        print("Thank you for checking our product")
+                        choice = input("Do you want to keep searching?:")
+                else:
+                    print("The item you are looking for " + item + " currently not in our shop ")
+                    choice = input("Do you want to keep searching?: ")
+
+        else:
+            print("We're very sorry but our shop does not provide that item.")
+            choice = input("Do you want to keep searching?: ")
+            while choice == "Yes":
+                item = input("What item are you looking for?:")
+                if item in temp_list:
+                    print("The item you are looking for " + item + " is in the shop ")
+                    answer = input("Do you want to add " + item + " to your cart?: ")
+                    if answer == "Yes":
+                        print(item + " has successfully added to the cart!")
+                        shopping_cart.append(item)
+                        choice = input("Do you want to keep searching?: ")
+                    else:
+                        print("Thank you for checking our product")
+                        choice = input("Do you want to keep searching?:")
+                else:
+                    print("The item you are looking for " + item + " currently not in our shop ")
+                    choice = input("Do you want to keep searching?: ")
+    else:
+        print("The item you are looking for " + item + " currently not in our shop ")
+        choice = input("Do you want to keep searching?: ")
+        while choice == "Yes":
+            item = input("What item are you looking for?:")
+            if item in temp_list:
+                print("The item you are looking for " + item + " is in the shop ")
+                answer = input("Do you want to add " + item + " to your cart?: ")
+                if answer == "Yes":
+                    print(item + " has successfully added to the cart!")
+                    shopping_cart.append(item)
+                    choice = input("Do you want to keep searching?: ")
+                else:
+                    print("Thank you for checking our product")
+
+            else:
+                print("The item you are looking for " + item + " currently not in our shop ")
+                choice = input("Do you want to keep searching?: ")
