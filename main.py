@@ -75,19 +75,29 @@ while True:
             print(j, k)
 
 
-    def filter_by_name(search_input):
-        for e in new_list:
-            if search_input in e.replace(" ", "").lower():
-                display_list.append(e)
+    def filter_by_name():
+        search_input = input("Please enter the name of the item you want to find: \n")
+        temp_list = []
+        for j in master_dictionary.keys():
+            temp_list.append(j)
+        if search_input in temp_list:
+            print(search_input)
+        else:
+            print("We're very sorry but our shop does not provide that item.")
 
 
-    def filter_by_id(search_input):
-        for e in new_list:
-            if search_input in e["id"]:
-                display_list.append(e)
+    def filter_by_id():
+        search_input = input("Please enter the id of the item you want to find: \n")
+        temp_list = []
+        for i in master_dictionary.values():
+            temp_list.append(i.get('id'))
+        if str(search_input) in temp_list:
+            print(search_input)
+        else:
+            print("There is no id like that in our shop.")
 
 
-    user_input = int(input("input a name: ").lower().replace(" ", ""))
+    user_input = input("input a name: ").lower().replace(" ", "")
     if user_input == "/stop":
         break
     else:
