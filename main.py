@@ -173,3 +173,161 @@ def Menu():
             print("This feature is currently not available")
 
 Menu()
+
+
+
+
+
+
+#Menu V2
+import sys
+#1
+def displayList():
+    print()
+    print("---AVAILABLE ITEMS---")
+    for i in shopping_list:
+        print ("*" + i )
+#shopping cart
+
+
+#2
+def displayCart():
+    print()
+    print("---YOUR CART---")
+    print(shopping_cart)
+
+shopping_cart = []
+#3
+def addItem():
+    item = input("Enter desired item: ")
+    if item in shopping_list:
+        print(item + " has been successfully added to your cart")
+        shopping_cart.append(item)
+    else:
+        print(item + " is currently not in our shop")
+
+    print(shopping_cart)
+
+#4
+def removeItem():
+    item = input("Enter undesired item: ")
+    if item in shopping_list:
+        shopping_cart.remove(item)
+        print(item + " has been successfully removed to your cart")
+    else:
+        print(item + " not found in your cart")
+    print(shopping_cart)
+
+#5
+def checkItem():
+    item = input("What item are you looking for?:")
+    if item in shopping_list:
+        print("The item you are looking for " + item + " is in the shop ")
+        answer = input("Do you want to add " + item + " to your cart?: ")
+        if answer == "Yes":
+            print(item + " has successfully added to the cart!")
+            shopping_cart.append(item)
+            choice = input("Do you want to keep searching?:")
+            while choice == "Yes":
+                item = input("What item are you looking for?:")
+                if item in shopping_list:
+                    print("The item you are looking for " + item + " is in the shop ")
+                    answer = input("Do you want to add " + item + " to your cart?: ")
+                    if answer == "Yes":
+                        print(item + " has successfully added to the cart!")
+                        shopping_cart.append(item)
+                        choice = input("Do you want to keep searching?: ")
+                    else:
+                        print("Thank you for checking our product")
+                        choice = input("Do you want to keep searching?:")
+                else:
+                    print("The item you are looking for " + item + " currently not in our shop ")
+                    choice = input("Do you want to keep searching?: ")
+
+        else:
+            print("Thank you for checking our product.")
+            choice = input("Do you want to keep searching?: ")
+            while choice == "Yes":
+                item = input("What item are you looking for?:")
+                if item in shopping_list:
+                    print("The item you are looking for " + item + " is in the shop ")
+                    answer = input("Do you want to add " + item + " to your cart?: ")
+                    if answer == "Yes":
+                        print(item + " has successfully added to the cart!")
+                        shopping_cart.append(item)
+                        choice = input("Do you want to keep searching?: ")
+                    else:
+                        print("Thank you for checking our product")
+                        choice = input("Do you want to keep searching?:")
+                else:
+                    print("The item you are looking for " + item + " currently not in our shop ")
+                    choice = input("Do you want to keep searching?: ")
+
+
+    else:
+        print("The item you are looking for " + item + " currently not in our shop ")
+        choice = input("Do you want to keep searching?: ")
+        while choice == "Yes":
+            item = input("What item are you looking for?:")
+            if item in shopping_list:
+                print("The item you are looking for " + item + " is in the shop ")
+                answer = input("Do you want to add " + item + " to your cart?: ")
+                if answer == "Yes":
+                    print(item + " has successfully added to the cart!")
+                    shopping_cart.append(item)
+                    choice = input("Do you want to keep searching?: ")
+                else:
+                    print("Thank you for checking our product")
+
+            else:
+                print("The item you are looking for " + item + " currently not in our shop ")
+                choice = input("Do you want to keep searching?: ")
+
+
+#6
+def clearList():
+    shopping_cart.clear()
+    print("Your cart now is empty")
+
+
+#shopping list
+shopping_list = ["Iphone 13 Pro Max", "Iphone 13 Pro", "Nvidia RTX 3090", "Nike Dior 1", "apple","bread","cookie","milktea","hoodie","cake"]
+
+def Menu():
+    while True:
+        print()
+        print(''' ### SHOPPING LIST ### 
+        ---SELECT A FEATURE YOU WOULD LIKE TO USE---:
+        1. View shopping list
+        2. View shopping cart 
+        3. Add item to shopping cart
+        4. Remove item from shopping cart 
+        5. Search item by name
+        6. Search item by id
+        7. Clear shopping cart
+        8. End shopping 
+        ''')
+
+        selection = input("What do you want to do: ")
+        if selection == "1":
+            displayList()
+        elif selection == "2":
+            displayCart()
+        elif selection == "3":
+            addItem()
+        elif selection == "4":
+            removeItem()
+        elif selection == "5":
+            checkItem()
+        elif selection == "6":
+            pass
+        elif selection == "7":
+            clearList()
+        elif selection == "8":
+            print("Thank you for shopping at our store!")
+            sys.exit()
+
+        else:
+            print("This feature is currently not available")
+
+Menu()
