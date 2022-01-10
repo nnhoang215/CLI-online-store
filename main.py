@@ -53,7 +53,63 @@ master_dictionary = {
             22 hours of video playback with a single charge
             For more info, checkout the product's official website:https://www.apple.com/vn/iphone-13-pro/specs""",
         "reviews": {"likes": 0, "dislikes": 0}
-    }
+    },
+    "Iphone 13 Pro": {
+        "id": "1002",
+        "price": 32000000,
+        "total_quantity": 40,
+        "colors": {
+            "blue": 10,
+            "green": 10,
+            "purple": 10,
+            "white": 10},
+        "weight": "200 grams",
+        "sizes": "6.1 inches",
+        "tech specs": """
+            IP68 Water Resistance,
+            A15 Bionic chip
+            New 6‑core CPU with 2 performance and 4 efficiency cores
+            New 5‑core GPU
+            New 16‑core Neural Engine
+            Pro 12MP camera system: Telephoto, Wide, and Ultra Wide cameras
+            Cinematic mode for recording videos with shallow depth of field (1080p at 30 fps)
+            FaceID
+            22 hours of video playback with a single charge
+            For more info, checkout the product's official website:https://www.apple.com/vn/iphone-13-pro/specs""",
+        "reviews": {"likes": 0, "dislikes": 0}
+    },
+    "Nvidia RTX 3090": {
+        "id": "1003",
+        "price": 69999000,
+        "total_quantity": 1,
+        "weight": "219 grams",
+        "sizes": "12.3 inches",
+        "tech specs": """
+            NVIDIA CUDA Cores 10496
+            NVIDIA CUDA Cores 10496
+            Boost Clock	1.70 GHz
+            Memory Size	24 GB
+            Memory Type	GDDR6X
+            For more info, checkout the product's official website:https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3090/""",
+        "reviews": {"likes": 0, "dislikes": 0}
+    },
+    "Nike Dior 1": {
+        "id": "1004",
+        "price": 533863467,
+        "total_quantity": 1,
+        "weight": "2400 grams",
+        "sizes": "11 inches",
+        "tech specs": """
+            Release Fall 2020
+            Only 8000 pairs were made
+            A collaboration between Nike and Dior 
+            For more info, checkout the product's official website: https://stockx.com/air-jordan-1-retro-high-dior""",
+        "reviews": {"likes": 0, "dislikes": 0}
+    },
+    "
+    
+
+    
 }
 shopping_cart = {"items": [], "total_price": 0}
 
@@ -185,8 +241,8 @@ import sys
 def displayList():
     print()
     print("---AVAILABLE ITEMS---")
-    for i in shopping_list:
-        print ("*" + i )
+        for j in master_dictionary:
+        print("* " + j)
 #shopping cart
 
 
