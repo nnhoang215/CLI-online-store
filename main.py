@@ -20,13 +20,6 @@ master_dictionary = {
         "tech specs": """
             IP68 Water Resistance,
             A15 Bionic chip
-            New 6‑core CPU with 2 performance and 4 efficiency cores
-            New 5‑core GPU
-            New 16‑core Neural Engine
-            Pro 12MP camera system: Telephoto, Wide, and Ultra Wide cameras
-            Cinematic mode for recording videos with shallow depth of field (1080p at 30 fps)
-            FaceID 
-            22 hours of video playback with a single charge
             For more info, checkout the product's official website:https://www.apple.com/vn/iphone-13-pro/specs""",
         "reviews": {"likes": 0, "dislikes": 0}
     },
@@ -44,12 +37,6 @@ master_dictionary = {
         "tech specs": """
             IP68 Water Resistance,
             A15 Bionic chip
-            New 6‑core CPU with 2 performance and 4 efficiency cores
-            New 5‑core GPU
-            New 16‑core Neural Engine
-            Pro 12MP camera system: Telephoto, Wide, and Ultra Wide cameras
-            Cinematic mode for recording videos with shallow depth of field (1080p at 30 fps)
-            FaceID
             22 hours of video playback with a single charge
             For more info, checkout the product's official website:https://www.apple.com/vn/iphone-13-pro/specs""",
         "reviews": {"likes": 0, "dislikes": 0}
@@ -74,8 +61,8 @@ while True:
         for j, k in master_dictionary.items():
             print(j, k)
 
-
-    def filter_by_name():
+    #filter items by name
+    def filter_by_name(): 
         search_input = input("Please enter the name of the item you want to find: \n")
         temp_list = []
         for j in master_dictionary.keys():
@@ -85,7 +72,7 @@ while True:
         else:
             print("We're very sorry but our shop does not provide that item.")
 
-
+    #filter items by id
     def filter_by_id():
         search_input = input("Please enter the id of the item you want to find: \n")
         temp_list = []
@@ -410,7 +397,7 @@ def checkItem():
     item = input("Please enter the name of the item you want to find: \n")
     temp_list = []
     for j in master_dictionary.keys():
-        temp_list.append(j)
+        temp_list.append(j) 
     if item in temp_list:
         print("The item you are looking for " + item + " is in the shop")
         answer = input("Do you want to add " + item + " to your cart?: ")
