@@ -131,24 +131,30 @@ while True:
             print(j, k)
 
 
-    def filter_by_name():
-        search_input = input("Please enter the name of the item you want to find: \n")
+   def filter_by_name():
+        search_input = input("Please enter the name of the item you want to find: \n>")
         temp_list = []
         for j in master_dictionary.keys():
             temp_list.append(j)
         if search_input in temp_list:
-            print(search_input)
+            quantity = master_dictionary.get(search_input).get("total_quantity")
+            print("There are {} {} available at our store.".format(quantity, search_input))
         else:
             print("We're very sorry but our shop does not provide that item.")
 
 
     def filter_by_id():
-        search_input = input("Please enter the id of the item you want to find: \n")
+        search_input = str(input("Please enter the id of the item you want to find: \n>"))
         temp_list = []
         for i in master_dictionary.values():
             temp_list.append(i.get('id'))
-        if str(search_input) in temp_list:
-            print(search_input)
+        if search_input in temp_list:
+            for key, val in master_dictionary.items():
+                if search_input == master_dictionary.get(key).get("id"):
+                    quantity = master_dictionary.get(key).get("total_quantity")
+                    print("The id belongs to {}, and there are {} of them in our store.".format(key, quantity))
+                else:
+                    pass
         else:
             print("There is no id like that in our shop.")
 
