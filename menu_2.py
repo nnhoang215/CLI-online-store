@@ -2,7 +2,6 @@ import json
 import common
 import sys
 import re
-from auth import get_address
 
 
 #1
@@ -89,6 +88,7 @@ with open("products.json") as json_file:
     
 # filter items by name
 def filter_by_name():
+    common.print_function("Search item by name")
     stop_word = "y"
     while stop_word == 'y':
         # This function takes string as an input to spot the string input in the products list
@@ -104,10 +104,10 @@ def filter_by_name():
                 pass
         print("Here is the result of your search:")
         if not item_list:
-            print("None")
+            common.print_fail("None")
         else:
             for num in range(0, len(item_list)):
-                print('{}.'.format(num+1) + item_list[num])
+                common.print_success('{}.'.format(num+1) + item_list[num])
 
         while True:
             stop_word = input("Would you like to continue searching? [y/n] \n>")
@@ -119,6 +119,7 @@ def filter_by_name():
 def filter_by_id():
     # This function takes string as an input to spot the string input in the products list
     # It will return a list of products containing the id
+    common.print_function("Search item by name")
     stop_word = "y"
     while stop_word == 'y':
         search_input = input("Please enter the id of the item you want to find: \n>")
@@ -132,10 +133,10 @@ def filter_by_id():
                 pass
         print("Here is the result of your search:")
         if not item_list:
-            print("None")
+            common.print_fail("None")
         else:
             for num in range(0, len(item_list)):
-                print('{}. {}'.format(num+1, item_list[num]))
+                common.print_success('{}. {}'.format(num+1, item_list[num]))
         while True:
             stop_word = input("Would you like to continue searching? [y/n] \n>")
             if stop_word in ['y', 'n']:
@@ -240,12 +241,14 @@ def gift_item():
 #shopping list
 # shopping_list = ["Iphone 13 Pro Max", "Iphone 13 Pro", "Nvidia RTX 3090", "Nike Dior 1", "apple","bread","cookie","milktea","hoodie","cake"]
 
+#11 get_info from auth.py
+    
 def menu_2():
     while True:
         print()
         common.print_highlight(''' ### SHOPPING LIST ### 
         ---SELECT A FEATURE YOU WOULD LIKE TO USE---:
-        1. View shopping list                               6. Search item by id
+        1. View shopping list                               6. Search item by id                        11. Get user info
         2. View shopping cart                               7. Clear shopping cart
         3. Add item to shopping cart                        8. Purchase
         4. Remove item from shopping cart                   9. Gifting service
@@ -274,6 +277,8 @@ def menu_2():
         elif selection == "10":
             print("Thank you for shopping at our store!")
             sys.exit()
+        elif selection == "11":
+            get_info(IS_ADMIN, CURRENT_USER)
         else:
             print("This feature is currently not available")
 
