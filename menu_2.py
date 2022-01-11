@@ -2,6 +2,8 @@ import json
 import common
 import sys
 import re
+from auth import get_address
+
 
 #1
 def get_shopping_list():
@@ -87,45 +89,59 @@ with open("products.json") as json_file:
     
 # filter items by name
 def filter_by_name():
-    # This function takes string as an input to spot the string input in the products list
-    # It will return a list of products that have the word written in the string
+    stop_word = "y"
+    while stop_word == 'y':
+        # This function takes string as an input to spot the string input in the products list
+        # It will return a list of products that have the word written in the string
 
-    search_input = input("Please enter the name of the item you want to find: \n>")
-    item_list = []
-    for i in range(0, len(lst_products)):
-        match_keyword = re.findall(search_input, lst_products[i].get('name'))
-        if match_keyword:
-            item_list.append(lst_products[i].get('name'))
+        search_input = input("Please enter the name of the item you want to find: \n>")
+        item_list = []
+        for i in range(0, len(lst_products)):
+            match_keyword = re.findall(search_input, lst_products[i].get('name'))
+            if match_keyword:
+                item_list.append(lst_products[i].get('name'))
+            else:
+                pass
+        print("Here is the result of your search:")
+        if not item_list:
+            print("None")
         else:
-            pass
-    print("Here is the result of your search:")
-    if not item_list:
-        print("None")
-    else:
-        for num in range(0, len(item_list)):
-            print('{}.'.format(num+1) + item_list[num])
+            for num in range(0, len(item_list)):
+                print('{}.'.format(num+1) + item_list[num])
+
+        while True:
+            stop_word = input("Would you like to continue searching? [y/n] \n>")
+            if stop_word in ['y', 'n']:
+                break
 
 #6
 # filter items by id
 def filter_by_id():
     # This function takes string as an input to spot the string input in the products list
     # It will return a list of products containing the id
-
-    search_input = input("Please enter the id of the item you want to find: \n>")
-    item_list = []
-    for i in range(0, len(lst_products)):
-        match_keyword = re.findall(search_input, lst_products[i].get('id'))
-        if match_keyword:
-            word_added = "[{}] {}".format(lst_products[i].get('id'), lst_products[i].get('name'))
-            item_list.append(word_added)
+    stop_word = "y"
+    while stop_word == 'y':
+        search_input = input("Please enter the id of the item you want to find: \n>")
+        item_list = []
+        for i in range(0, len(lst_products)):
+            match_keyword = re.findall(search_input, lst_products[i].get('id'))
+            if match_keyword:
+                word_added = "[{}] {}".format(lst_products[i].get('id'), lst_products[i].get('name'))
+                item_list.append(word_added)
+            else:
+                pass
+        print("Here is the result of your search:")
+        if not item_list:
+            print("None")
         else:
-            pass
-    print("Here is the result of your search:")
-    if not item_list:
-        print("None")
-    else:
-        for num in range(0, len(item_list)):
-            print('{}. {}'.format(num+1, item_list[num]))
+            for num in range(0, len(item_list)):
+                print('{}. {}'.format(num+1, item_list[num]))
+        while True:
+            stop_word = input("Would you like to continue searching? [y/n] \n>")
+            if stop_word in ['y', 'n']:
+                break
+
+
 
 #7
 def clearList():
@@ -145,6 +161,80 @@ def purchase():
     print(shopping_list)
         # item[2] - SHOPPING_CART[]
 #9
+service_lst = [
+    {'name': "Standard service",
+     'price': 50,
+     'description': """
+---SERVICE'S DESCRIPTION---
+1. Scheduled shipping time with the customer
+(Delivery takes at least 2 days)
+2. Standard wrapping material
+3. Include: 
+    - a rose
+    - a gifting card hand-written by our staff
+---------------------------
+     """
+    },
+    {'name': 'Premium service',
+     'price': 200,
+     'description': """
+---SERVICE'S DESCRIPTION---
+1. Scheduled shipping time with the customer
+(Delivery takes at least 2 days)
+2. Premium wrapping material
+(Will schedule meeting with customer to take custom wrapping order)
+3. Include: 
+    - a flower bouquet 
+    - balloons
+    - a teddy bear
+    - a gifting card hand-written by our staff and sealed with our shop wax seal  
+---------------------------
+     """
+    }
+]
+def print_message():
+    print('I\'m sorry, I did not understand your selection. Please enter the corresponding letter for your response.')
+
+
+def choose_service():
+    print("Okay. Here are two gifting services that we are currently providing:")
+    for i in range(0,len(service_lst)):
+        print(service_lst[i].get('description'))
+    gift_service = input("Please choose your option: \n[a] Standard \n[b] Premium \n>")
+    if gift_service == 'a':
+    # return tiền để tí cộng vào bill checkout
+        return 50
+    elif gift_service == 'b':
+        return 100
+    else:
+        print_message()
+        return choose_service()
+
+def notify_email():
+    send_email = input("Do you want to send an email notifying the recipient? [y/n] \n>")
+    if send_email == 'y':
+        pass # để tạm :))
+        # Gửi mail vs nội dung là "You have received a gift from ..."
+    elif send_email == 'n':
+        print("Sure")
+        pass
+    else:
+        print_message()
+        return notify_email()
+
+
+def gift_item():
+    # This function take email of the person that receive the gift of the user to print out the recipient's address
+    # It will also offer deals and services when gifting someone
+    # return the price of the chosen service
+    user_input = input("Please enter the email of the gift recipient: \n>")
+    print("The gift will be delivered to {}".format(get_address(user_input)))
+    bill_service = choose_service()
+    notify_email()
+    # return price of service rồi lúc viết
+    # chỉ cần khai thêm biến = gift_item() rồi cộng vào để check out
+    return bill_service
+
 
 
 #shopping list
@@ -158,8 +248,8 @@ def menu_2():
         1. View shopping list                               6. Search item by id
         2. View shopping cart                               7. Clear shopping cart
         3. Add item to shopping cart                        8. Purchase
-        4. Remove item from shopping cart                   9. Exit shop
-        5. Search item by name                             
+        4. Remove item from shopping cart                   9. Gifting service
+        5. Search item by name                              10. Exit shop
         ''')
 
         selection = input("What do you want to do: ")
@@ -180,146 +270,12 @@ def menu_2():
         elif selection == "8":
             pass
         elif selection == "9":
+            gift_item()
+        elif selection == "10":
             print("Thank you for shopping at our store!")
             sys.exit()
         else:
             print("This feature is currently not available")
 
 
-#find by name
-def checkItem():
-    item = input("Please enter the name of the item you want to find: \n")
-    temp_list = []
-    for item in master_dictionary.keys():
-        temp_list.append(item)
-    if item in temp_list:
-        print("The item you are looking for" + item + " is in the shop")
-        answer = input("Do you want to add " + item + " to your cart?: ")
-        if answer == "Yes":
-            print(item + " has successfully added to the cart!")
-            SHOPPING_CART.append(item)
-            choice = input("Do you want to keep searching?:")
-            while choice == "Yes":
-                item = input("What item are you looking for?:")
-                if item in temp_list:
-                    print("The item you are looking for " + item + " is in the shop ")
-                    answer = input("Do you want to add " + item + " to your cart?: ")
-                    if answer == "Yes":
-                        print(item + " has successfully added to the cart!")
-                        SHOPPING_CART.append(item)
-                        choice = input("Do you want to keep searching?: ")
-                    else:
-                        print("Thank you for checking our product")
-                        choice = input("Do you want to keep searching?:")
-                else:
-                    print("The item you are looking for " + item + " currently not in our shop ")
-                    choice = input("Do you want to keep searching?: ")
-
-        else:
-            print("We're very sorry but our shop does not provide that item.")
-            choice = input("Do you want to keep searching?: ")
-            while choice == "Yes":
-                item = input("What item are you looking for?:")
-                if item in temp_list:
-                    print("The item you are looking for " + item + " is in the shop ")
-                    answer = input("Do you want to add " + item + " to your cart?: ")
-                    if answer == "Yes":
-                        print(item + " has successfully added to the cart!")
-                        SHOPPING_CART.append(item)
-                        choice = input("Do you want to keep searching?: ")
-                    else:
-                        print("Thank you for checking our product")
-                        choice = input("Do you want to keep searching?:")
-                else:
-                    print("The item you are looking for " + item + " currently not in our shop ")
-                    choice = input("Do you want to keep searching?: ")
-    else:
-        print("The item you are looking for " + item + " currently not in our shop ")
-        choice = input("Do you want to keep searching?: ")
-        while choice == "Yes":
-            item = input("What item are you looking for?:")
-            if item in temp_list:
-                print("The item you are looking for " + item + " is in the shop ")
-                answer = input("Do you want to add " + item + " to your cart?: ")
-                if answer == "Yes":
-                    print(item + " has successfully added to the cart!")
-                    SHOPPING_CART.append(item)
-                    choice = input("Do you want to keep searching?: ")
-                else:
-                    print("Thank you for checking our product")
-
-            else:
-                print("The item you are looking for " + item + " currently not in our shop ")
-                choice = input("Do you want to keep searching?: ")
-                
-                
-                
-                
-                
-                
-   #search by name and feature
-def checkItem():
-    item = input("Please enter the name of the item you want to find: \n")
-    temp_list = []
-    for j in master_dictionary.keys():
-        temp_list.append(j) 
-    if item in temp_list:
-        print("The item you are looking for " + item + " is in the shop")
-        answer = input("Do you want to add " + item + " to your cart?: ")
-        if answer == "Yes":
-            print(item + " has successfully added to the cart!")
-            SHOPPING_CART.append(item)
-            choice = input("Do you want to keep searching?:")
-            while choice == "Yes":
-                item = input("What item are you looking for?:")
-                if item in temp_list:
-                    print("The item you are looking for " + item + " is in the shop ")
-                    answer = input("Do you want to add " + item + " to your cart?: ")
-                    if answer == "Yes":
-                        print(item + " has successfully added to the cart!")
-                        SHOPPING_CART.append(item)
-                        choice = input("Do you want to keep searching?: ")
-                    else:
-                        print("Thank you for checking our product")
-                        choice = input("Do you want to keep searching?:")
-                else:
-                    print("The item you are looking for " + item + " currently not in our shop ")
-                    choice = input("Do you want to keep searching?: ")
-
-        else:
-            print("Thank you for checking our product.")
-            choice = input("Do you want to keep searching?: ")
-            while choice == "Yes":
-                item = input("What item are you looking for?:")
-                if item in temp_list:
-                    print("The item you are looking for " + item + " is in the shop ")
-                    answer = input("Do you want to add " + item + " to your cart?: ")
-                    if answer == "Yes":
-                        print(item + " has successfully added to the cart!")
-                        SHOPPING_CART.append(item)
-                        choice = input("Do you want to keep searching?: ")
-                    else:
-                        print("Thank you for checking our product")
-                        choice = input("Do you want to keep searching?:")
-                else:
-                    print("The item you are looking for " + item + " currently not in our shop ")
-                    choice = input("Do you want to keep searching?: ")
-    else:
-        print("The item you are looking for " + item + " currently not in our shop ")
-        choice = input("Do you want to keep searching?: ")
-        while choice == "Yes":
-            item = input("What item are you looking for?:")
-            if item in temp_list:
-                print("The item you are looking for " + item + " is in the shop ")
-                answer = input("Do you want to add " + item + " to your cart?: ")
-                if answer == "Yes":
-                    print(item + " has successfully added to the cart!")
-                    SHOPPING_CART.append(item)
-                    choice = input("Do you want to keep searching?: ")
-                else:
-                    print("Thank you for checking our product")
-
-            else:
-                print("The item you are looking for " + item + " currently not in our shop ")
-                choice = input("Do you want to keep searching?: ")
 
