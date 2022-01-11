@@ -248,13 +248,8 @@ def menu_2():
         1. View shopping list                               6. Search item by id
         2. View shopping cart                               7. Clear shopping cart
         3. Add item to shopping cart                        8. Purchase
-<<<<<<< HEAD
-        4. Remove item from shopping cart                   9. Check specific information
-        5. Search item by name                              10. Exit
-=======
         4. Remove item from shopping cart                   9. Gifting service
         5. Search item by name                              10. Exit shop
->>>>>>> kien_bui
         ''')
 
         selection = input("What do you want to do: ")
@@ -275,11 +270,7 @@ def menu_2():
         elif selection == "8":
             pass
         elif selection == "9":
-<<<<<<< HEAD
-            checkAll()
-=======
             gift_item()
->>>>>>> kien_bui
         elif selection == "10":
             print("Thank you for shopping at our store!")
             sys.exit()
@@ -290,73 +281,73 @@ def menu_2():
 
 
                 
-#
-products_string ='''
-{
-    "products": [
-        {
-            "name": "Iphone 13 Pro Max Pink",
-            "category": "Phone",
-            "id": "1001",
-            "quantity": 40,
-            "color": "Pink",
-            "weight": "240g",
-            "size": "6.7in",
-            "tech_specs": "IP68 Water Resistance, A15 Bionic chip, For more info, checkout the product's official website:https://www.apple.com/vn/iphone-13-pro/specs",
-            "reviews": {"likes": 0, "dislikes": 0}
-        },
-        {
-            "name": "Iphone 13 Blue",
-            "category": "Phone",
-            "id": "1002",
-            "quantity": 20,
-            "color": "Blue",
-            "weight": "240g",
-            "size": "6.7in",
-            "tech_specs": "IP68 Water Resistance, A15 Bionic chip, For more info, checkout the product's official website:https://www.apple.com/vn/iphone-13-pro/specs",
-            "reviews": {"likes": 0, "dislikes": 0}
-        },
-        {
-            "name": "JBL Pulse 3",
-            "category": "Audio",
-            "id": "1003",
-            "quantity": 40,
-            "color": "Green",
-            "weight": "103g",
-            "size": "10in",
-            "tech_specs": "add them vao nhe",
-            "reviews": {"likes": 0, "dislikes": 0}
-        },
-        {
-            "name": "JBL Pulse 4",
-            "category": "Audio",
-            "id": "1004",
-            "quantity": 40,
-            "color": "Yellow",
-            "weight": "240g",
-            "size": "6.7in",
-            "tech_specs": "add them vao",
-            "reviews": {"likes": 0, "dislikes": 0}
-        }
-    ]
-}
-'''
+# #
+# products_string ='''
+# {
+#     "products": [
+#         {
+#             "name": "Iphone 13 Pro Max Pink",
+#             "category": "Phone",
+#             "id": "1001",
+#             "quantity": 40,
+#             "color": "Pink",
+#             "weight": "240g",
+#             "size": "6.7in",
+#             "tech_specs": "IP68 Water Resistance, A15 Bionic chip, For more info, checkout the product's official website:https://www.apple.com/vn/iphone-13-pro/specs",
+#             "reviews": {"likes": 0, "dislikes": 0}
+#         },
+#         {
+#             "name": "Iphone 13 Blue",
+#             "category": "Phone",
+#             "id": "1002",
+#             "quantity": 20,
+#             "color": "Blue",
+#             "weight": "240g",
+#             "size": "6.7in",
+#             "tech_specs": "IP68 Water Resistance, A15 Bionic chip, For more info, checkout the product's official website:https://www.apple.com/vn/iphone-13-pro/specs",
+#             "reviews": {"likes": 0, "dislikes": 0}
+#         },
+#         {
+#             "name": "JBL Pulse 3",
+#             "category": "Audio",
+#             "id": "1003",
+#             "quantity": 40,
+#             "color": "Green",
+#             "weight": "103g",
+#             "size": "10in",
+#             "tech_specs": "add them vao nhe",
+#             "reviews": {"likes": 0, "dislikes": 0}
+#         },
+#         {
+#             "name": "JBL Pulse 4",
+#             "category": "Audio",
+#             "id": "1004",
+#             "quantity": 40,
+#             "color": "Yellow",
+#             "weight": "240g",
+#             "size": "6.7in",
+#             "tech_specs": "add them vao",
+#             "reviews": {"likes": 0, "dislikes": 0}
+#         }
+#     ]
+# }
+# '''
 
-items = json.loads(products_string)['products']load the json data
-def checkAll():
-    search_text = input("Enter an item name:\n")# Input the item name that you want to search
+# items = json.loads(products_string)['products']load the json data
+# def checkAll():
+#     search_text = input("Enter an item name:\n")# Input the item name that you want to search
 
-    result = 0
-    for i in range(len(items)):
-        if search_text.lower() in items[i]["name"].lower():
-            result = result + 1
-            print("-------------------------")
-            print("Product name: ", items[i]["name"])
-            print("Product category: ", items[i]["category"])
-            print("Product quantity: ", items[i]["quantity"])
-            print("Product color: ", items[i]["color"])
-            print("Product size: ", items[i]["category"])
-            print("Product specs: ", item[i]["tech_specs"])
+#     result = 0
+#     for i in range(len(items)):
+#         if search_text.lower() in items[i]["name"].lower():
+#             result = result + 1
+#             print("-------------------------")
+#             print("Product name: ", items[i]["name"])
+#             print("Product category: ", items[i]["category"])
+#             print("Product quantity: ", items[i]["quantity"])
+#             print("Product color: ", items[i]["color"])
+#             print("Product size: ", items[i]["category"])
+#             print("Product specs: ", item[i]["tech_specs"])
 
-    if result == 0:
-        print("No result")
+#     if result == 0:
+#         print("No result")
