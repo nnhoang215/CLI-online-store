@@ -1,6 +1,7 @@
 import json
 import common
 import sys
+import re
 
 #1
 def get_shopping_list():
@@ -80,7 +81,52 @@ def removeItem():
     # print(SHOPPING_CART)
 
 #5
+with open("products.json") as json_file:
+    data = json.load(json_file)
+    lst_products = data["products"]
+    
+# filter items by name
+def filter_by_name():
+    # This function takes string as an input to spot the string input in the products list
+    # It will return a list of products that have the word written in the string
+
+    search_input = input("Please enter the name of the item you want to find: \n>")
+    item_list = []
+    for i in range(0, len(lst_products)):
+        match_keyword = re.findall(search_input, lst_products[i].get('name'))
+        if match_keyword:
+            item_list.append(lst_products[i].get('name'))
+        else:
+            pass
+    print("Here is the result of your search:")
+    if not item_list:
+        print("None")
+    else:
+        for num in range(0, len(item_list)):
+            print('{}.'.format(num+1) + item_list[num])
+
 #6
+# filter items by id
+def filter_by_id():
+    # This function takes string as an input to spot the string input in the products list
+    # It will return a list of products containing the id
+
+    search_input = input("Please enter the id of the item you want to find: \n>")
+    item_list = []
+    for i in range(0, len(lst_products)):
+        match_keyword = re.findall(search_input, lst_products[i].get('id'))
+        if match_keyword:
+            word_added = "[{}] {}".format(lst_products[i].get('id'), lst_products[i].get('name'))
+            item_list.append(word_added)
+        else:
+            pass
+    print("Here is the result of your search:")
+    if not item_list:
+        print("None")
+    else:
+        for num in range(0, len(item_list)):
+            print('{}. {}'.format(num+1, item_list[num]))
+
 #7
 def clearList():
     SHOPPING_CART.clear()
@@ -126,9 +172,9 @@ def menu_2():
         elif selection == "4":
             removeItem()
         elif selection == "5":
-            print("checkItem")
+            filter_by_name()
         elif selection == "6":
-            pass
+            filter_by_id()
         elif selection == "7":
             clearList()
         elif selection == "8":
