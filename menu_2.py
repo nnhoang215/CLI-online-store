@@ -47,7 +47,7 @@ def addItem():
     item_index = int(common.input_highlight("Enter desired item index : "))
     item_quantity = int(common.input_highlight("Quantity : "))
     try: 
-        item = shopping_list[item_index]
+        item = shopping_list[item_index].copy()
         item.append(item_index) 
         item[2] = item_quantity
         if item and (item[2] != 0):
