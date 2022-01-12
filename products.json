@@ -181,23 +181,6 @@
             }
         },
         {
-    "products": [
-        {
-            "name": "Iphone 13 Pro Max Pink",
-            "price": 100,
-            "category": "phone",
-            "id": "0",
-            "quantity": 248,
-            "color": "pink",
-            "weight": "240g",
-            "size": "6.7in",
-            "tech_specs": "IP68 Water Resistance, A15 Bionic chip, For more info, checkout the product's official website:https://www.apple.com/vn/iphone-13-pro/specs",
-            "reviews": {
-                "likes": 0,
-                "dislikes": 0
-            }
-        },
-        {
             "name": "Nvidia RTX 3090",
             "price": "2000",
             "id": "13",
