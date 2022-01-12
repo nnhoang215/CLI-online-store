@@ -11,6 +11,7 @@ import sys
 import re
 from Promo import promo_check,promo_list
 
+
 users = pd.read_csv('users.csv')
 
 CURRENT_USER = users.iloc[0]
@@ -153,6 +154,16 @@ def display_cart():
 
 SHOPPING_CART = []
 #3
+def write_json(data, file_name="products.json"):
+    with open(file_name, "w") as f:
+            json.dump(data, f, indent=4)
+    
+with open("products.json") as json_file:
+    data = json.load(json_file)
+    temp = data["products"]
+    list_dict = data["products"]
+
+write_json(data)
 def all_item_info():
     viewing = "y"
     while viewing == 'y':
