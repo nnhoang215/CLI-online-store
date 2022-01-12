@@ -1,0 +1,10 @@
+from read_and_write_json import list_dict
+
+def all_item_info():
+    user_input = int(input("Please enter the index of the item for the item's info \n>"))
+    key_list = list_dict[user_input]
+    for i in key_list:
+        print('{}: {}'.format(i, list_dict[user_input].get(i)))
+
+
+all_item_info()

@@ -9,6 +9,7 @@ import common
 import sys
 import re
 from Promo import promo_check,promo_list
+from read_and_write_json import list_dict
 
 users = pd.read_csv('users.csv')
 
@@ -149,6 +150,14 @@ def display_cart():
 
 SHOPPING_CART = []
 #3
+def all_item_info():
+    user_input = int(input("Please enter the index of the item for the item's info \n>"))
+    key_list = list_dict[user_input]
+    for i in key_list:
+        print('{}: {}'.format(i, list_dict[user_input].get(i)))
+
+SHOPPING_CART = []
+#4
 def add_item():
     item_index = int(common.input_highlight("Enter desired item index : "))
     item_quantity = int(common.input_highlight("Quantity : "))
@@ -170,7 +179,7 @@ def add_item():
 
     # print(SHOPPING_CART)
 
-#4
+#5
 def remove_item():
     item_index = int(input("Enter undesired item index: "))
 
@@ -188,7 +197,7 @@ def remove_item():
     #     print(item + " not found in your cart")
     # print(SHOPPING_CART)
 
-#5
+#6
 with open("products.json") as json_file:
     data = json.load(json_file)
     lst_products = data["products"]
@@ -221,7 +230,7 @@ def filter_by_name():
             if stop_word in ['y', 'n']:
                 break
 
-#6
+#7
 # filter items by id
 def filter_by_id():
     # This function takes string as an input to spot the string input in the products list
@@ -251,12 +260,12 @@ def filter_by_id():
 
 
 
-#7
+#8
 def clear_list():
     SHOPPING_CART.clear()
     common.print_success("Your cart now is empty.")
 
-#8
+#9
 def purchase():
     ordered_items = SHOPPING_CART.copy()
     total_cost = 0
@@ -303,7 +312,7 @@ def update_quantity(shopping_list):
     json_file.close()
         
         
-#8.5
+#9.5
 service_lst = [
     {'name': "Standard service",
      'description': """
@@ -396,11 +405,12 @@ def menu_2():
         print()
         common.print_highlight(''' ### SHOPPING LIST ### 
         ---SELECT A FEATURE YOU WOULD LIKE TO USE---:
-        1. View shopping list                               6. Search item by id                      
-        2. View shopping cart                               7. Clear shopping cart
-        3. Add item to shopping cart                        8. Purchase
-        4. Remove item from shopping cart                   9. Get user info
-        5. Search item by name                             10. Exit shop
+        1. View shopping list                               7. Search item by id                    
+        2. View shopping cart                               8. Clear shopping cart
+        3. View item's all info                             9. Purchase
+        4. Add item to shopping cart                        10. Get user info
+        5. Remove item from shopping cart                   11. Exit shop
+        6. Search item by name 
         ''')
 
         selection = input("What do you want to do: ")
@@ -408,21 +418,23 @@ def menu_2():
             display_list()
         elif selection == "2":
             display_cart()
-        elif selection == "3":
-            add_item()
+        elif selection == '3':
+            all_item_info()
         elif selection == "4":
-            remove_item()
+            add_item()
         elif selection == "5":
-            filter_by_name()
+            remove_item()
         elif selection == "6":
-            filter_by_id()
+            filter_by_name()
         elif selection == "7":
-            clear_list()
+            filter_by_id()
         elif selection == "8":
-            purchase()
+            clear_list()
         elif selection == "9":
-            common.print_success(get_info(IS_ADMIN, CURRENT_USER))
+            purchase()
         elif selection == "10":
+            common.print_success(get_info(IS_ADMIN, CURRENT_USER))
+        elif selection == "11":
             print("Thank you for shopping at our store!")
             sys.exit()
         else:
