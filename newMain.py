@@ -1,4 +1,4 @@
-from os import ttyname
+import os
 import pandas as pd
 from pandas.core.algorithms import isin
 from pandas.core.indexes.base import Index
@@ -259,6 +259,14 @@ def clear_list():
 def purchase():
     ordered_items = SHOPPING_CART.copy()
     total_cost = 0
+    gift_service = input("Is this a gift for somebody? [y/n] \n>")
+    if gift_service == 'y':
+        total_cost += gift_item()
+    elif gift_service == 'n':
+        pass
+    else:
+        print_message()
+        return purchase()
     for j in range(len(SHOPPING_CART)):
         cart_item = SHOPPING_CART[j]
         total_cost += (cart_item[1]*cart_item[2])
@@ -288,7 +296,7 @@ def update_quantity(shopping_list):
     json_file.close()
         
         
-#9
+#8.5
 service_lst = [
     {'name': "Standard service",
      'price': 50,
@@ -378,11 +386,11 @@ def menu_2():
         print()
         common.print_highlight(''' ### SHOPPING LIST ### 
         ---SELECT A FEATURE YOU WOULD LIKE TO USE---:
-        1. View shopping list                               6. Search item by id                        11. Exit shop
+        1. View shopping list                               6. Search item by id                      
         2. View shopping cart                               7. Clear shopping cart
         3. Add item to shopping cart                        8. Purchase
-        4. Remove item from shopping cart                   9. Gifting service
-        5. Search item by name                             10. Get user info
+        4. Remove item from shopping cart                   9. Get user info
+        5. Search item by name                             10. Exit shop
         ''')
 
         selection = input("What do you want to do: ")
@@ -403,10 +411,8 @@ def menu_2():
         elif selection == "8":
             purchase()
         elif selection == "9":
-            gift_item()
-        elif selection == "10":
             common.print_success(get_info(IS_ADMIN, CURRENT_USER))
-        elif selection == "11":
+        elif selection == "10":
             print("Thank you for shopping at our store!")
             sys.exit()
         else:
