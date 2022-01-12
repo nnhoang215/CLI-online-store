@@ -179,7 +179,73 @@
                 "likes": 0,
                 "dislikes": 0
             }
+        },
+        {
+    "products": [
+        {
+            "name": "Iphone 13 Pro Max Pink",
+            "price": 100,
+            "category": "phone",
+            "id": "0",
+            "quantity": 248,
+            "color": "pink",
+            "weight": "240g",
+            "size": "6.7in",
+            "tech_specs": "IP68 Water Resistance, A15 Bionic chip, For more info, checkout the product's official website:https://www.apple.com/vn/iphone-13-pro/specs",
+            "reviews": {
+                "likes": 0,
+                "dislikes": 0
+            }
+        },
+        {
+            "name": "Nvidia RTX 3090",
+            "price": "2000",
+            "id": "13",
+            "quantity": "201"
+        },
+        {
+            "name": "Nike Dior 1",
+            "price": "10000",
+            "id": "14",
+            "quantity": "35"
+        },
+        {
+            "name": "1963 Ferrari GTO",
+            "price": "500000",
+            "id": "15",
+            "quantity": "10"
+        },
+        {
+            "name": "Tesla Model S",
+            "price": "300000",
+            "id": "16",
+            "quantity": "300"
+        },
+        {
+            "name": "Crystal Piano",
+            "price": "20000",
+            "id": "17",
+            "quantity": "89"
+        },
+        {
+            "name": "Magnetic floating bed",
+            "price": "1000000",
+            "id": "18",
+            "quantity": "56"
+        },
+        {
+            "name": "Saffron",
+            "price": "11",
+            "id": "19",
+            "quantity": "1000"
+        },
+        {
+            "name": "Graff Diamonds Hallucination Watch",
+            "price": "10000000",
+            "id": "20",
+            "quantity": "78"
         }
+        
 
     ]
 }
