@@ -203,7 +203,7 @@ def filter_by_name():
         search_input = input("Please enter the name of the item you want to find: \n>")
         item_list = []
         for i in range(0, len(lst_products)):
-            match_keyword = re.findall(search_input, lst_products[i].get('name'))
+            match_keyword = re.findall(search_input, lst_products[i].get('name').lower)
             if match_keyword:
                 item_list.append(lst_products[i].get('name'))
             else:
