@@ -268,9 +268,9 @@ def purchase():
     else:
         print_message()
         return purchase()
-    have_promo_code = input("Do you have a promo code? \n>")
+    have_promo_code = input("Do you have a promo code? [y/n] \n>")
     if have_promo_code == 'y':
-        total_cost += promo_check(promo_list)
+        total_cost = total_cost - int(promo_check(promo_list))
     else:
         pass
     common.print_success("Proceeding to check out...")
