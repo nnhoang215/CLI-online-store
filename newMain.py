@@ -2,7 +2,7 @@ from os import ttyname
 import pandas as pd
 from pandas.core.algorithms import isin
 from pandas.core.indexes.base import Index
-from confirmation import send_signup_confirmation
+from confirmation import send_order_confirmation, send_signup_confirmation
 import common
 import json
 import common
@@ -11,7 +11,7 @@ import re
 
 users = pd.read_csv('users.csv')
 
-CURRENT_USER = users.iloc[0]
+CURRENT_USER = users.iloc[5]
 IS_LOGGED_IN = False
 IS_ADMIN = False
 
@@ -123,7 +123,7 @@ def get_shopping_list():
 
 shopping_list = get_shopping_list() # [['Iphone 13 Pro Max Pink', 100, 40], ['Iphone 13 Blue', 200, 20], ['JBL Pulse 3', 200, 40], ['JBL Pulse 4', 300, 40]]
 
-def displayList():
+def display_list():
     with open("products.json") as json_file:
         data = json.load(json_file)
     common.print_highlight("---AVAILABLE ITEMS---")
@@ -141,14 +141,14 @@ def displayList():
 
 
 #2
-def displayCart():
+def display_cart():
     print()
     print("---YOUR CART---")
     common.print_highlight(str(SHOPPING_CART))
 
 SHOPPING_CART = []
 #3
-def addItem():
+def add_item():
     item_index = int(common.input_highlight("Enter desired item index : "))
     item_quantity = int(common.input_highlight("Quantity : "))
     try: 
@@ -170,7 +170,7 @@ def addItem():
     # print(SHOPPING_CART)
 
 #4
-def removeItem():
+def remove_item():
     item_index = int(input("Enter undesired item index: "))
 
     try:
@@ -251,13 +251,13 @@ def filter_by_id():
 
 
 #7
-def clearList():
+def clear_list():
     SHOPPING_CART.clear()
     common.print_success("Your cart now is empty.")
 
 #8
 def purchase():
-    purchased_items = SHOPPING_CART.copy()
+    ordered_items = SHOPPING_CART.copy()
     total_cost = 0
     for j in range(len(SHOPPING_CART)):
         cart_item = SHOPPING_CART[j]
@@ -265,9 +265,16 @@ def purchase():
         shopping_list_index = cart_item[3]
         shopping_list[shopping_list_index][2] = int(shopping_list[shopping_list_index][2]) - int(cart_item[2])
     update_quantity(shopping_list)
-    # order_confirmation()
-    common.print_success("Successfully purchased " + str(SHOPPING_CART) + ". Total cost is " + str(total_cost)+ " dollars")
-    clearList()
+    order_summary = create_order_summary(ordered_items)
+    send_order_confirmation(CURRENT_USER['email'], CURRENT_USER['full_name'], CURRENT_USER['address'], order_summary)
+    common.print_success("Successfully ordered \n \n" + str(order_summary) + " \n Total cost is " + str(total_cost)+ " dollars \n")
+    clear_list()
+
+def create_order_summary(ordered_items):
+    item_summary = ""
+    for i in ordered_items:
+        item_summary = item_summary + "+ " +str(i[2]) + " " + str(i[0]) + " - " + str(i[1]) + "$" + "\n"
+    return item_summary
 
 def update_quantity(shopping_list):
     json_file = open("products.json", "r")
@@ -380,19 +387,19 @@ def menu_2():
 
         selection = input("What do you want to do: ")
         if selection == "1":
-            displayList()
+            display_list()
         elif selection == "2":
-            displayCart()
+            display_cart()
         elif selection == "3":
-            addItem()
+            add_item()
         elif selection == "4":
-            removeItem()
+            remove_item()
         elif selection == "5":
             filter_by_name()
         elif selection == "6":
             filter_by_id()
         elif selection == "7":
-            clearList()
+            clear_list()
         elif selection == "8":
             purchase()
         elif selection == "9":

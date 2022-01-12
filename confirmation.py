@@ -21,18 +21,19 @@ def send_signup_confirmation(email, key, full_name):
     except:
         common.print_fail("Could not send confirmation to '{email}'".format(email=email))
 
-# def order_confirmation(email, purchased_items, full_name):
-#     address = get_address(email)
-#     contents = [""" Dear {full_name},
+def send_order_confirmation(email, full_name, address, order_summary):
+    contents = [""" Dear {full_name},
 
-#         Your order has been successfully placed. 
-#         {purchased_items} are being shipped to {address}
-#         Expect your package in 3 days
+        Your order has been successfully placed.
+        
+        {order_summary} 
+        are being shipped to {address}
+        Expect your package in 3 days
 
-#         Best,
-#         CLI Online App group 4
-#     """.format(full_name = full_name, email=email, purchased_items = purchased_items, address = address)]
-#     try:
-#         yagmail.SMTP('hoangtesting93@gmail.com','@HoangTest' ).send(email,'Order Confirmation', contents)
-#     except:
-#         common.print_fail("Could not send confirmation to '{email}'".format(email=email))
+        Best,
+        CLI Online App group 4
+    """.format(full_name = full_name, email=email, order_summary = order_summary, address = address)]
+    try:
+        yagmail.SMTP('hoangtesting93@gmail.com','@HoangTest' ).send(email,'Order Confirmation', contents)
+    except:
+        common.print_fail("Could not send confirmation to '{email}'".format(email=email))
