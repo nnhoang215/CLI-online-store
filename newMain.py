@@ -151,10 +151,16 @@ def display_cart():
 SHOPPING_CART = []
 #3
 def all_item_info():
-    user_input = int(input("Please enter the index of the item for the item's info \n>"))
-    key_list = list_dict[user_input]
-    for i in key_list:
-        print('{}: {}'.format(i, list_dict[user_input].get(i)))
+    viewing = "y"
+    while viewing == 'y':
+        user_input = int(input("Please enter the index of the item for the item's info \n>"))
+        key_list = list_dict[user_input]
+        for i in key_list:
+            print('{}: {}'.format(i, list_dict[user_input].get(i)))
+        while True:
+            viewing = input("Do you want to continue viewing item's information? [y/n] \n>")
+            if viewing in ['y','n']:
+                break
 
 SHOPPING_CART = []
 #4
