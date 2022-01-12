@@ -1,7 +1,10 @@
-full_name,email,key,address,phone_number,items_bought,total expense
-visitor,visitor,visitor,visitor,visitor,visitor,visitor
-admin,admin,admin,admin,admin,admin,admin
-Hoang Nguyen,nnhoang215@gmail.com,123,"35 Kim Ma, Ba Dinh",099 5656444,0,0
-asdf,gg,12,asdf,asdf,0,0
-af,ccc,123,as,f,0,0
-Hoang Nguyen,215nnhoang@gmail.com,1234,45 Hmmmm,097,0,0
+full_name,email,key,address,phone_number
+visitor,visitor,visitor,visitor,visitor
+admin,admin,admin,admin,admin
+Hoang Nguyen,nnhoang215@gmail.com,123,"35 Kim Ma, Ba Dinh",099 5656444
+asdf,gg,12,asdf,asdf
+af,ccc,123,as,f
+Hoang Nguyen,215nnhoang@gmail.com,1234,45 Hmmmm,097
+Le TUng,letungcntt@gmail.com,123,1234 ggg,09766
+Kien Bui,kienbq2003@gmail.com,123,123 Thanh XUan,0954
+aa,a,a,a,a

@@ -1,6 +1,5 @@
 import yagmail
 import common
-from menu_2 import purchase
 
 
 ############################## EXTRA FEATURE ######################################
@@ -19,13 +18,14 @@ def send_signup_confirmation(email, key, full_name):
     try:
         yagmail.SMTP('hoangtesting93@gmail.com','@HoangTest' ).send(email,'Account Registration', contents)
     except:
-        common.print_fail("Could not send confirmation to '{email}'".format(email=email))
+        common.print_fail("Could not send confirmation to {email}".format(email=email))
 
 def send_order_confirmation(email, full_name, address, order_summary):
+    print(email)
     contents = [""" Dear {full_name},
 
         Your order has been successfully placed.
-        
+
         {order_summary} 
         are being shipped to {address}
         Expect your package in 3 days
