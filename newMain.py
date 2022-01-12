@@ -2,6 +2,7 @@ import os
 import pandas as pd
 from pandas.core.algorithms import isin
 from pandas.core.indexes.base import Index
+from comment import ask_feedback
 from confirmation import send_order_confirmation, send_signup_confirmation
 import common
 import json
@@ -13,11 +14,10 @@ from read_and_write_json import list_dict
 
 users = pd.read_csv('users.csv')
 
-CURRENT_USER = users.iloc[5]
+CURRENT_USER = users.iloc[0]
 IS_LOGGED_IN = False
 IS_ADMIN = False
 
-#full_name,email,key,address,phone number,items bought,total expense 
 def get_address(email):
     user = users[(users['email'] == email)]
     user_index = user.index[0]
@@ -49,8 +49,6 @@ def sign_up():
             'key': [signup_key],
             'address': [address],
             'phone_number': [phone],
-            'items_bought': [0],
-            'total_expense': [0],
         })
         new_user.to_csv('users.csv', mode = 'a', header = False, index=False)
         send_signup_confirmation(signup_email, signup_key, full_name)
@@ -61,6 +59,7 @@ def sign_up():
         sign_in()
         
 def sign_in():
+    is_logged_in = False
     users = pd.read_csv('users.csv')
     common.print_function("Logging into your account")
 
@@ -79,24 +78,27 @@ def sign_in():
 
     login_key = str(input("Password: "))
     
-    global IS_LOGGED_IN
-    IS_LOGGED_IN = login_key == str(users.at[user_index, 'key'])
+    is_logged_in = login_key == str(users.at[user_index, 'key'])
+    
+    
 
     if login_email == "admin":
         global IS_ADMIN
         IS_ADMIN = True
 
-    if IS_LOGGED_IN:
+    if is_logged_in:
         global CURRENT_USER
-        CURRENT_USER = user
+        CURRENT_USER = user.squeeze()
         print(CURRENT_USER)
+        global IS_LOGGED_IN
+        IS_LOGGED_IN = is_logged_in
         common.print_success("Login successfully \n")
     else:
         common.print_fail("Wrong password. Please try again")
-        choice = common.input_highlight("Enter '1' or '2'. [1] Try again | [2] Sign Up ")
-        if choice == '1':
+        new_choice = common.input_highlight("Enter '1' or '2'. [1] Try again | [2] Sign Up ")
+        if new_choice == '1':
             sign_in()
-        elif choice == '2':
+        elif new_choice == '2':
             sign_up()
 
 def authenticate():
@@ -112,7 +114,7 @@ def authenticate():
 
 
 
-#1
+
 def get_shopping_list():
     shopping_list = []
     with open("products.json") as json_file:
@@ -123,8 +125,9 @@ def get_shopping_list():
         shopping_list.append(product)
     return shopping_list
 
-shopping_list = get_shopping_list() # [['Iphone 13 Pro Max Pink', 100, 40], ['Iphone 13 Blue', 200, 20], ['JBL Pulse 3', 200, 40], ['JBL Pulse 4', 300, 40]]
+shopping_list = get_shopping_list()
 
+#1
 def display_list():
     with open("products.json") as json_file:
         data = json.load(json_file)
@@ -146,7 +149,8 @@ def display_list():
 def display_cart():
     print()
     print("---YOUR CART---")
-    common.print_highlight(str(SHOPPING_CART))
+    display_cart = create_order_summary(SHOPPING_CART)
+    common.print_success(display_cart)
 
 SHOPPING_CART = []
 #3
@@ -173,17 +177,10 @@ def add_item():
         item[2] = item_quantity
         if item and (item[2] != 0):
             SHOPPING_CART.append(item)
-            common.print_success("Successfully added! Your cart: " + str(SHOPPING_CART))
+            display_cart = create_order_summary(SHOPPING_CART)
+            common.print_success("Successfully added! Your cart: \n" + display_cart)
     except:
         common.print_fail("Item not available")
-    # item = input("Enter desired item: ")
-    # if item in shopping_list:
-    #     print(item + " has been successfully added to your cart")
-    #     SHOPPING_CART.append(item)
-    # else:
-    #     print(item + " is currently not in our shop")
-
-    # print(SHOPPING_CART)
 
 #5
 def remove_item():
@@ -193,15 +190,10 @@ def remove_item():
         item = SHOPPING_CART[item_index]
         if item:
             SHOPPING_CART.pop(item_index)
-            common.print_success("Removed " + str(item[0]) + "." + "\n" + "Your cart: " + str(SHOPPING_CART))
+            display_cart = create_order_summary(SHOPPING_CART)
+            common.print_success("Removed " + str(item[0]) + "." + "\n" + "Your cart: \n" + display_cart)
     except:
         common.print_fail("Item not in your cart!")
-    # if item in shopping_list:
-    #     SHOPPING_CART.remove(item)
-    #     print(item + " has been successfully removed to your cart")
-    # else:
-    #     print(item + " not found in your cart")
-    # print(SHOPPING_CART)
 
 #6
 with open("products.json") as json_file:
@@ -219,7 +211,7 @@ def filter_by_name():
         search_input = input("Please enter the name of the item you want to find: \n>")
         item_list = []
         for i in range(0, len(lst_products)):
-            match_keyword = re.findall(search_input, lst_products[i].get('name').lower)
+            match_keyword = re.findall(search_input, lst_products[i].get('name').lower())
             if match_keyword:
                 item_list.append(lst_products[i].get('name'))
             else:
@@ -299,6 +291,7 @@ def purchase():
     send_order_confirmation(CURRENT_USER['email'], CURRENT_USER['full_name'], CURRENT_USER['address'], order_summary)
     common.print_success("Successfully ordered \n \n" + str(order_summary) + " \n Total cost is " + str(total_cost)+ " dollars \n")
     clear_list()
+    ask_feedback()
 
 def create_order_summary(ordered_items):
     item_summary = ""
@@ -394,19 +387,31 @@ def gift_item():
     # chỉ cần khai thêm biến = gift_item() rồi cộng vào để check out
     return bill_service
 
+#10
+def get_info(is_admin, current_user):
+    users = pd.read_csv('users.csv')
 
-
-
-
-#shopping list
-# shopping_list = ["Iphone 13 Pro Max", "Iphone 13 Pro", "Nvidia RTX 3090", "Nike Dior 1", "apple","bread","cookie","milktea","hoodie","cake"]
-
+    target_email = common.input_highlight("Email of who you want to search: ")
+    target_user =  users[(users['email'] == target_email)]
+    if is_admin:
+        return target_user
+    else:
+        common.print_fail("\n You are not authorized to see other's information!")
+        return current_user
 #11 
-# def exit_shop():
+def log_out():
+    global CURRENT_USER
+    CURRENT_USER = users.iloc[0]
+    global IS_LOGGED_IN
+    IS_LOGGED_IN = False
+    common.print_fail("You are logged out!")
+    authenticate()
+
 
 
     
 def menu_2():
+    display_list()
     while True:
         print()
         common.print_highlight(''' ### SHOPPING LIST ### 
@@ -414,9 +419,9 @@ def menu_2():
         1. View shopping list                               7. Search item by id                    
         2. View shopping cart                               8. Clear shopping cart
         3. View item's all info                             9. Purchase
-        4. Add item to shopping cart                        10. Get user info
-        5. Remove item from shopping cart                   11. Exit shop
-        6. Search item by name 
+        4. Add item to shopping cart                       10. Get user info
+        5. Remove item from shopping cart                  11. Log out
+        6. Search item by name                             12. Exit shop 
         ''')
 
         selection = input("What do you want to do: ")
@@ -441,6 +446,8 @@ def menu_2():
         elif selection == "10":
             common.print_success(get_info(IS_ADMIN, CURRENT_USER))
         elif selection == "11":
+            log_out()
+        elif selection == "12":
             print("Thank you for shopping at our store!")
             sys.exit()
         else:
@@ -467,16 +474,6 @@ def menu_2():
 #     if result == 0:
 #         print("No result")
 
-def get_info(is_admin, current_user):
-    users = pd.read_csv('users.csv')
-
-    target_email = common.input_highlight("Email of who you want to search: ")
-    target_user =  users[(users['email'] == target_email)]
-    if is_admin:
-        return target_user
-    else:
-        common.print_fail("\n You are not authorized to see other's information!")
-        return current_user
 
 def get_shopping_info(is_admin, current_user):
     users = pd.read_csv('users.csv')
@@ -484,13 +481,7 @@ def get_shopping_info(is_admin, current_user):
 
 
 def main():
-    exit_program = False
-    # authenticate()
-    # while exit_program == False:
+    authenticate()
     menu_2()
-    # print(get_shopping_list())
-    # print(get_info(IS_ADMIN, CURRENT_USER))
 
 main()
-
-    
