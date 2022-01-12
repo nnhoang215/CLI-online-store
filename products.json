@@ -39,7 +39,7 @@
             "color": "green",
             "weight": "103g",
             "size": "10in",
-            "tech_specs": "add them vao nhe",
+            "tech_specs": "12hrs battery, IPX7 waterproof, JBL connect+ technology",
             "reviews": {
                 "likes": 0,
                 "dislikes": 0
@@ -54,11 +54,132 @@
             "color": "yello",
             "weight": "300g",
             "size": "10in",
-            "tech_specs": "add them vao",
+            "tech_specs": "12hrs battery, IPX7 waterproof, JBL connect+ technology, shine very birght",
+            "reviews": {
+                "likes": 0,
+                "dislikes": 0
+            }
+        },
+        {
+            "name": "Quantum Computer",
+            "price": 200,
+            "category": "tech",
+            "id": "13",
+            "quantity": 5,
+            "color": "siver gold",
+            "weight": "5kg",
+            "size": "50cm",
+            "tech_specs": "72hrs battery, waterproof, KK's patent quantum mechanic",
+            "reviews": {
+                "likes": 0,
+                "dislikes": 0
+            }
+        },
+        {
+            "name": "Portal Gun",
+            "price": 200,
+            "category": "lifestyle",
+            "id": "6",
+            "quantity": 74,
+            "color": "blue",
+            "weight": "2kg",
+            "size": "30cm",
+            "tech_specs": "12hrs battery, anti-dimension technology, the cake is a lie",
+            "reviews": {
+                "likes": 0,
+                "dislikes": 0
+            }
+        },
+        {
+            "name": "Robocop",
+            "price": 765000,
+            "category": "safety",
+            "id": "7",
+            "quantity": 10,
+            "color": "silver",
+            "weight": "1030kg",
+            "size": "185cm",
+            "tech_specs": "72hrs battery, waterproof, fireproof, human-rights-proof, 24/7 active surveillance, not violated any human rights",
+            "reviews": {
+                "likes": 0,
+                "dislikes": 0
+            }
+        },
+        {
+            "name": "Srength-enhanced KK Nanobot Drug",
+            "price": 9923,
+            "category": "tech-medicine",
+            "id": "8",
+            "quantity": 77,
+            "color": "nano",
+            "weight": "103g",
+            "size": "5ml",
+            "tech_specs": "KK's patent nano-technology, Bio-enhancer for genetic, tested by the FDA",
+            "reviews": {
+                "likes": 0,
+                "dislikes": 0
+            }
+        },
+        {
+            "name": "Japan Massage Stick MK23",
+            "price": 345,
+            "category": "lifestyle",
+            "id": "9",
+            "quantity": 277,
+            "color": "milky white",
+            "weight": "57g",
+            "size": "30cm",
+            "tech_specs": "12hrs battery, Japanese Massage Patent technology, easy-grip design, unique vibration pattern",
+            "reviews": {
+                "likes": 0,
+                "dislikes": 0
+            }
+        },
+        {
+            "name": "Soundcore Liberty Air 2",
+            "price": 245,
+            "category": "audio",
+            "id": "10",
+            "quantity": 373,
+            "color": "black",
+            "weight": "103g",
+            "size": "10in",
+            "tech_specs": "24hrs battery, IPX7 waterproof, Bluetooth+ App, Soundproofing",
+            "reviews": {
+                "likes": 0,
+                "dislikes": 0
+            }
+        },
+        {
+            "name": "Nature Longevity Pill",
+            "price": 8099,
+            "category": "tech-medicine",
+            "id": "11",
+            "quantity": 7,
+            "color": "green",
+            "weight": "10g",
+            "size": "3cm",
+            "tech_specs": "Made with nanotech to prolong user's life, green coating with a hint of matcha",
+            "reviews": {
+                "likes": 0,
+                "dislikes": 0
+            }
+        },
+        {
+            "name": "BOSS deluxe massage chair",
+            "price": 1500,
+            "category": "lifestyle",
+            "id": "12",
+            "quantity": 18,
+            "color": "Brown leather",
+            "weight": "10kg",
+            "size": "125cm",
+            "tech_specs": "deluxe in the name, massage through user's soul, enhance user's vitality, tested by the FDA",
             "reviews": {
                 "likes": 0,
                 "dislikes": 0
             }
         }
+
     ]
 }
