@@ -1,6 +1,5 @@
 import yagmail
 import common
-from menu_2 import purchase
 
 
 ############################## EXTRA FEATURE ######################################

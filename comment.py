@@ -20,4 +20,3 @@ def ask_feedback():
     else:
         print("Thank you for trusting and choosing our shop! \n")
         print("---THANK YOU AND SEE YOU SOON!---")
-        sys.exit()

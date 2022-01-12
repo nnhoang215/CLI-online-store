@@ -10,7 +10,6 @@ import common
 import sys
 import re
 from Promo import promo_check,promo_list
-from read_and_write_json import list_dict
 
 users = pd.read_csv('users.csv')
 
