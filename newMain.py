@@ -8,6 +8,7 @@ import json
 import common
 import sys
 import re
+from Promo import promo_check,promo_list
 
 users = pd.read_csv('users.csv')
 
@@ -267,6 +268,12 @@ def purchase():
     else:
         print_message()
         return purchase()
+    have_promo_code = input("Do you have a promo code? \n>")
+    if have_promo_code == 'y':
+        total_cost += promo_check(promo_list)
+    else:
+        pass
+    common.print_success("Proceeding to check out...")
     for j in range(len(SHOPPING_CART)):
         cart_item = SHOPPING_CART[j]
         total_cost += (cart_item[1]*cart_item[2])
@@ -299,9 +306,9 @@ def update_quantity(shopping_list):
 #8.5
 service_lst = [
     {'name': "Standard service",
-     'price': 50,
      'description': """
 ---SERVICE'S DESCRIPTION---
+Price: 50$
 1. Scheduled shipping time with the customer
 (Delivery takes at least 2 days)
 2. Standard wrapping material
@@ -312,9 +319,9 @@ service_lst = [
      """
     },
     {'name': 'Premium service',
-     'price': 200,
      'description': """
 ---SERVICE'S DESCRIPTION---
+Price: 200$
 1. Scheduled shipping time with the customer
 (Delivery takes at least 2 days)
 2. Premium wrapping material
@@ -341,7 +348,7 @@ def choose_service():
     # return tiền để tí cộng vào bill checkout
         return 50
     elif gift_service == 'b':
-        return 100
+        return 200
     else:
         print_message()
         return choose_service()
@@ -349,6 +356,7 @@ def choose_service():
 def notify_email():
     send_email = input("Do you want to send an email notifying the recipient? [y/n] \n>")
     if send_email == 'y':
+        print("Okay, we will send a notification to the given email address.")
         pass # để tạm :))
         # Gửi mail vs nội dung là "You have received a gift from ..."
     elif send_email == 'n':
@@ -370,6 +378,8 @@ def gift_item():
     # return price of service rồi lúc viết
     # chỉ cần khai thêm biến = gift_item() rồi cộng vào để check out
     return bill_service
+
+
 
 
 

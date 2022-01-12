@@ -38,3 +38,5 @@ def create_code_dict() -> dict:
             line1 = f.readline().strip()
     return code_dict
 
+
+promo_list = create_code_dict()
